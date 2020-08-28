@@ -1,0 +1,125 @@
+
+<html>
+  <head>
+    
+    <script src='https://code.jquery.com/jquery.min.js'></script>
+    
+    <style>
+      
+html {
+
+
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+
+body{
+  font-family: "Courier";
+}
+img{
+  width:200px;
+}
+#wd,#gup{
+  font-size:300%;
+  text-align:center;
+  border:solid thick white;
+  padding:2ex;
+  color: white;
+}
+#sco {
+  color: white;
+  font-weight: bold;
+}
+#quest{
+  color: red;
+  font-weight: bold;
+
+}
+#gup{
+  color: white;
+}
+#qco {
+  color: white;
+  font-weight: bold;
+}
+
+
+
+
+    </style>
+  </head>
+  <body>
+  
+   <h1>Quiz?</h1>
+   <div class="col-md-12" style="color: white;
+  font-weight: bold;">Your Score is: <span id='sco'>0</span> of <span id='qco'>0</span>
+   </div>
+   <div class="col-xs-12">
+    <div class="col-xs-4"></div>
+    
+   <div id='quest' class="col-xs-4"></div>
+   <div class="col-xs-4"></div>
+  
+   </div>
+   <div id='wd' class="col-md-12" style='display:none'>Well Done!</div>
+   <div id='gup' class="col-md-12" style='display:none'>The Answer was <span id='rans'></span></div>
+
+
+   <script>
+    
+
+
+$(function(){
+  shownQuest();
+});
+
+function shownQuest(){
+  $.ajax({url:'/randomf',dataType:'json',success:function(d){
+    $('#quest').empty();
+    $('#quest')
+      .append($('<div/>',{text:'Name the Country of this Flag ?'}))
+      .append($('<img/>',{src:d.flag}))
+      .append('<br>')
+      .append('<br>')
+      .append($('<input>',{
+         id:'ans',
+         class: 'form-control',
+         placeholder: 'Insert Answer then press Enter key',
+         keydown:function(){
+           console.log($(this).val());
+           if ($(this).val().toLowerCase() == d.name.toLowerCase()){
+             var score = parseInt($('#sco').text());
+             score = score + 1;
+             $('#sco').text(score);
+             $('#qco').text(1+parseInt($('#qco').text()));
+             $('#wd').delay(100).fadeIn('normal',function(){
+               $(this).delay(1500).fadeOut(function(){
+                 shownQuest();
+               });
+             });
+           }
+         }}))
+      .append('<br>')
+      .append($('<button/>',{text:'Show Answer', class: "btn btn-danger", click:function(){
+         $('#qco').text(1+parseInt($('#qco').text()));
+         $('#rans').text(d.name);
+         $('#gup').delay(100).fadeIn('normal',function(){
+           $(this).delay(1500).fadeOut(function(){
+             shownQuest();
+           });
+         });
+      }}));
+    $('#ans').focus();
+  }});
+}
+
+   </script>
+  </body>
+</html>
+

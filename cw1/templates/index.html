@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block contents %}
+<div id='hc'>
+        
+</div>
+
+
+
+<script>
+$(document).ready(function(){
+  $('.dropdown-submenu a.test').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+$('#clist div').click(function(){
+    $.ajax({url:$(this).data('href'),
+      success:function(d){
+        $('#hc').html(d);
+      }
+  });
+  });
+
+$('#alist div').click(function(){
+    $.ajax({url:$(this).data('href'),
+      success:function(d){
+        $('#hc').html(d);
+      }
+  });
+  });
+
+$('#rlist div').click(function(){
+    $.ajax({url:$(this).data('href'),
+      success:function(d){
+        $('#hc').html(d);
+      }
+  });
+  });
+
+$('#qz div').click(function(){
+    $.ajax({url:$(this).data('href'),
+      success:function(d){
+        $('#hc').html(d);
+      }
+  });
+  });
+
+
+</script>
+{% endblock %}

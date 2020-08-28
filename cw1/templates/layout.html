@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/static/world.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="//code.jquery.com/jquery.min.js"></script>
+	<script src="/static/world.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+body {
+	font-family: "Courier";
+	background: black;
+}
+
+h1 {
+	color: white;
+	font-size: 70px;
+
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
+
+.ds {
+	height: 60px;
+	position: initial;
+}
+.header {
+	height: 70px;
+	width: 100%;
+	text-align: center;
+}
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #353b48;
+    border-radius: 30px;
+    padding: 10px;
+    }
+
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    color: transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 450px;
+    color:red;
+    transition: width 0.4s linear;
+    }
+
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    }
+.dropdown-toggle {
+    @include caret(right);
+    &::after {
+      vertical-align: 0;
+    }
+  }
+}
+
+.dropdown-submenu {
+  position: relative;
+
+}
+.flink {
+	color: lightgreen;
+}
+.flink:hover {
+	color: violet;
+}
+ 
+
+#container {
+
+ background-color: grey;
+}
+#clist div{
+	color: black;
+	cursor: pointer;
+}
+#alist div{
+	color: white;
+	cursor: pointer;
+	}
+#alist strong{
+	transition: 0.4s;
+
+}
+#alist strong:hover {
+	font-size: 24px;
+	color: orange;
+}
+#alist strong:active {
+	color: black;
+}
+
+
+#rlist div{
+	color: black;
+	cursor: pointer;
+}
+#hc{
+	text-align: center;
+	width: 100%;
+	height: 50%;
+	position: absolute;
+}
+.alpha{
+	color: white;
+}
+
+.ali ul {
+  list-style-type: none;
+  
+  overflow: hidden;
+  
+}
+
+.ali li {
+  float: left;
+  padding-left: 35px;
+  margin-left: 10px;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="container">
+<div class="content-wrap">
+	<div class="ds">
+		<div class="header">
+			<h1>
+				World Factbook
+			</h1>
+		</div>
+		<div class="col-md-12">
+		<div class="col-md-4">
+		<div class="btn-group dropright">
+		 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><b>Continents</b>
+		 </button>
+		  <ul class="dropdown-menu" id="clist">
+		    	{% for c in continentList %}
+		      <li class="dropdown-submenu">
+		        <div data-href='continent/{{c}}' class="test" tabindex="-1">{{c}}</div>
+		      </li>
+		      {% endfor %}
+		  </ul>
+		</div>
+		</div>
+		<div class="col-md-5">
+		<div style=" float: left">
+			<form action="find">
+				<div class="searchbar">
+			          <input class="search_input" type="text" name="scn" id="scn" placeholder="search countries by name...">
+			          <button type="submit" class="search_icon">
+				          <i class="fas fa-search"></i>
+			          </button>
+			    </div>
+			</form>
+		</div>
+		</div>
+		<div class="col-md-3">
+		<div class="btn-group dropright">
+		 <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"><b>Rank Info</b>
+		 </button>
+		  <ul class="dropdown-menu" id="rlist">
+		    	
+		      <li class="dropdown-submenu">
+		        <div data-href='rankinfo/area' class="test" tabindex="-1">Area</div>
+		      </li>
+		       <li class="dropdown-submenu">
+		        <div data-href='rankinfo/gdp' class="test" tabindex="-1">GDP</div>
+		      </li>
+		       <li class="dropdown-submenu">
+		        <div data-href='rankinfo/population' class="test" tabindex="-1">Population</div>
+		      </li>
+		      
+		  </ul>
+		</div>
+		</div>
+		</div>
+		<div class="ali">
+			<nav>
+				<ul class="ali" id="alist"> 
+				{% for a in al %}
+				
+					<li class="ali"><div data-href="/alpha/{{a}}"><strong>{{a}}</strong></div></li>
+				
+				{% endfor %}
+				</ul> 
+			</nav>	
+		</div>
+	</div>
+
+	
+
+ <div>
+ 	<button class="btn btn-info" id="qz">
+ 		<div data-href='/quiz'><strong> Quiz <i class="fas fa-question-circle"></i></strong>
+ 		</div>
+ 	</button>
+ </div>
+
+ <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">
+	 <i class="fas fa-plus">
+	 	
+	 </i>
+	<strong>Add New Country</strong>
+</button>
+
+
+<form action="/addCountry" method="post">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Put a new country</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="country" class="col-form-label">Name:</label>
+            <input type="text" class="form-control" name="c-name" placeholder="Enter country..." autofocus>
+          </div>
+          <div class="form-group">
+            <label for="capital" class="col-form-label">Capital:</label>
+            <input type="text" class="form-control" name="c-cap" placeholder="Enter capital..." required>
+          </div>
+          <div class="form-group">
+            <label for="continent" class="col-form-label">Continent:</label>
+            <input type="text" class="form-control" name="c-cont" placeholder="Enter continent..." required>
+          </div>
+          <div class="form-group">
+            <label for="area" class="col-form-label">Area:</label>
+            <input type="text" class="form-control" name="c-area" placeholder="Enter area..." required>
+          </div>
+          <div class="form-group">
+            <label for="population" class="col-form-label">Population:</label>
+            <input type="text" class="form-control" name="c-popu" placeholder="Enter population..." required>
+          </div>
+          <div class="form-group">
+            <label for="gdp" class="col-form-label">GDP:</label>
+            <input type="text" class="form-control" name="c-gdp" placeholder="Enter gross domestic profit..." required>
+          </div>
+          <div class="form-group">
+            <label for="tld" class="col-form-label">TLD:</label>
+            <input type="text" class="form-control" name="c-tld" placeholder="Enter top level domain..." required>
+          </div>
+          <div class="form-group">
+           <label for="flag" class="col-form-label">Flag:</label>
+				
+			<input type="text" class="form-control" name="c-flag" placeholder="Enter flag link..." required>
+	
+          </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Add</button>
+      </div>
+       
+    </div>
+  </div> 
+</div>
+</form>
+</div>
+
+{% block contents %}{% endblock %}
+
+<footer>
+
+ 
+  <div class="footer-copyright text-center py-3">© 2019 Copyright: World Factbook. All Rights Reserved |
+    <a href="/" class="flink">World Factbook.com</a>
+  </div>
+ 
+
+</footer>
+
+</div>
+
+
+
+
+</body>
+</html>
