@@ -1,0 +1,75 @@
+
+#go{
+	width: 15%;
+	height: 80px;
+	margin: auto;
+	font-size: 24px;
+	font-weight: bold;
+}
+#dtp {
+	display: none;
+}
+#kamount {
+	display: none;
+}
+#amount {
+	display: none;
+}
+#rep {
+	display: none;
+}
+#krep {
+	display: none;
+}
+#pay{
+	width: 15%;
+	height: 80px;
+	margin: auto;
+	font-size: 24px;
+	font-weight: bold;
+}
+#confirm{
+	width: 15%;
+	height: 80px;
+	margin-top:5%;
+	font-size: 24px;
+	font-weight: bold;
+}
+#prinvoice{
+	width: 15%;
+	height: 80px;
+	margin-top:5%;
+	font-size: 24px;
+	font-weight: bold;
+}
+#ki1{
+	display: none;
+}
+#start{
+	width: 15%;
+	height: 80px;
+	margin-top:5%;
+	font-size: 24px;
+	font-weight: bold;
+}
+#print{
+	width: 15%;
+	height: 80px;
+	margin-top:5%;
+	font-size: 24px;
+	font-weight: bold;
+}
+#cancel{
+	width: 15%;
+	height: 80px;
+	
+	font-size: 24px;
+	font-weight: bold;
+}
+#next{
+	width: 15%;
+	height: 80px;
+	
+	font-size: 24px;
+	font-weight: bold;
+}	
